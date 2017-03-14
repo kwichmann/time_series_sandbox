@@ -1,2 +1,2 @@
-# time_series_sandbox
+# Time Series Sandbox
 Toying around with time series
