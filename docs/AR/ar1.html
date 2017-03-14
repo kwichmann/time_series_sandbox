@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AR(1) model</title>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.6/p5.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.6/addons/p5.dom.js"></script>
+	<script src="../libs/math.min.js"></script>
+	
+	<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+	<script src="ar1_sketch.js"></script>
+
+<style type="text/css">
+	.center {
+		text-align: center;
+	}
+
+	input {
+		margin: 10px;
+	}
+</style>
+
+</head>
+<body>
+<h1 class="center">AR(1) model generator</h1>
+<div id="canvas"></div>
+<div id="model" class="center">
+	Model: \( X_t = \rho X_{t-1} + \varepsilon_{t-1}(\sigma^2) \)
+</div>
+<div>
+	<p id="rho">\(\rho\) parameter: </p>
+	<p id="sigma">\(\sigma\) parameter: </p>
+</div>
+</body>
+</html>
