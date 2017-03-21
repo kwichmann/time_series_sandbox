@@ -39,7 +39,7 @@ function setup() {
 
 function draw() {
 	background(255);
-	draw_ts(height / 2);
+	draw_ts(ts, height / 3, 2 * height / 3);
 
 	rho_value.html("Value: " + rho_slider.value());
 	sigma_value.html("Value: " + sigma_slider.value());
@@ -67,10 +67,17 @@ function generate_ts() {
 	last_rho = rho;
 }
 
-function draw_ts(y_offset) {
+function draw_ts(series, y_offset) {
+	// Draw time axis
 	strokeWeight(3);
 	stroke(0);
 	line(0, y_offset, width, y_offset);
+
+	// If a third argument is given, draw time axis for differences as well
+	var draw_diff = (arguments.length > 2);
+	if (draw_diff) {
+		line(0, arguments[2], width, arguments[2]);
+	}
 
 	if (last_rho < 1) {
 		stroke(0, 0, 255);
@@ -82,9 +89,24 @@ function draw_ts(y_offset) {
 		stroke(0, 255, 0);
 	}
 
+
+	// Calculate difference
+	var diff = [0];
+	for (var i = 1; i < series.length; i++) {
+		diff.push(series[i] - series[i - 1])
+	}
+
 	strokeWeight(2);
 
 	for (var t = 0; t < width - 1; t++) {
-		line(t * 2, ts[t] + y_offset, (t + 1) * 2, ts[t + 1] + y_offset);
+		// Plot time series
+		line(t * 2, series[t] + y_offset, (t + 1) * 2, series[t + 1] + y_offset);
+
+		// Plot difference if second argument given
+		if (draw_diff) {
+			if (t > 0) {
+				line(t * 2, diff[t] + arguments[2], (t + 1) * 2, diff[t + 1] + arguments[2]);
+			}
+		}
 	}
 }
